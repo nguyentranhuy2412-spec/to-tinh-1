@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tỏ Tình Online 💘</title>
+  <style>
+    body {
+      background: radial-gradient(circle at top, #fffacc, #ff80a0);
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      padding: 40px;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2em;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff; }
+      to { text-shadow: 0 0 20px #ff4080; }
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    #btn {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #accept {
+      background-color: #4cd137;
+      color: white;
+    }
+
+    #decline {
+      background-color: #c23616;
+      color: white;
+    }
+
+    .heart {
+      position: absolute;
+      animation: float 3s linear forwards;
+      font-size: 2em;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 2em;
+    }
+
+    #ring {
+      font-size: 5em;
+      margin-top: 20px;
+      color: gold;
+      animation: ring-shake 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes ring-shake {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(15deg);}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nhạc nền -->
+  <audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/12/audio_77594be21e.mp3?filename=marry-me-121882.mp3" type="audio/mpeg">
+    Trình duyệt không hỗ trợ phát nhạc.
+  </audio>
+
+  <h1>💖 Tớ có điều muốn nói 💖</h1>
+  <p>💌 Tớ thích cậu mất rồi 🥺</p>
+  <button id="btn">Bấm vô nè 💓</button>
+
+  <div id="choices" style="display: none; margin-top: 20px;">
+    <button id="accept">Đồng ý 💘</button>
+    <button id="decline">Từ chối 💔</button>
+  </div>
+
+  <div id="result"></div>
+  <div id="ring"></div>
+  <div id="hearts"></div>
+
+  <script>
+    const btn = document.getElementById('btn');
+    const hearts = document.getElementById('hearts');
+    const choices = document.getElementById('choices');
+    const result = document.getElementById('result');
+    const ring = document.getElementById('ring');
+    const bgm = document.getElementById('bgm');
+
+    btn.addEventListener('click', () => {
+      // Phát nhạc (nếu trình duyệt cho phép)
+      bgm.play().catch(() => {
+        console.log("Trình duyệt chặn phát nhạc tự động");
+      });
+
+      // Trái tim bay
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💓';
+      heart.style.left = Math.random() * 90 + 'vw';
+      heart.style.top = '80vh';
+      hearts.appendChild(heart);
+
+      choices.style.display = 'block';
+      result.innerHTML = '';
+      ring.innerHTML = '';
+
+      setTimeout(() => heart.remove(), 3000);
+    });
+
+    document.getElementById('accept').addEventListener('click', () => {
+      result.style.color = "#ffe600";
+      result.textContent = "Yessss! 💍 Đây là nhẫn dành cho cậu 💖";
+      ring.textContent = "💍";
+    });
+
+    document.getElementById('decline').addEventListener('click', () => {
+      result.style.color = "#ff0000";
+      result.textContent = "Không được đâu 😤 Tớ không chấp nhận từ chối!!!";
+      ring.textContent = "";
+    });
+  </script>
+
+</body>
+</html>
